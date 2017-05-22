@@ -17,9 +17,12 @@ export default class AfterScenario {
      */
     private async saveFailedScenarioScreenshot(scenarioResult: HookScenario) {
         const screenshot = await(browser.takeScreenshot());
+        const decodedImage = new Buffer(screenshot.replace(/^data:image\/png;base64,/, ''), 'base64');
         const fileName = `${scenarioResult.getName()
             .replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s/g, '-')
             .toLowerCase().substr(0,100)}.png`;
+
+        scenarioResult.attach(decodedImage, 'image/png');
 
         this.saveScreenshot(screenshot, fileName);
 

@@ -1,6 +1,7 @@
 'use strict';
 const argv = require('yargs').argv;
 const path = require('path');
+const multiCucumberHTLMReporter = require('multiple-cucumber-html-reporter');
 
 exports.config = sharedConfig();
 
@@ -13,6 +14,7 @@ function sharedConfig() {
             require: [
                 path.resolve(process.cwd(), './e2e-tests/**/after.scenario.ts'),
                 path.resolve(process.cwd(), './e2e-tests/**/cucumber.config.ts'),
+                path.resolve(process.cwd(), './e2e-tests/**/reporter.ts'),
                 path.resolve(process.cwd(), './e2e-tests/**/*.steps.ts')
             ],
             format: 'pretty',
@@ -22,6 +24,13 @@ function sharedConfig() {
 
         onPrepare: function () {
             // place something here
+        },
+        afterLaunch: function(){
+            multiCucumberHTLMReporter.generate({
+                openReportInBrowser: true,
+                jsonDir: '.tmp/json-output',
+                reportPath: './.tmp/report/'
+            });
         },
 
         allScriptsTimeout: 11000,
