@@ -8,7 +8,7 @@ export default class ExampleSteps {
 
     @given(/^I visit the Angular homepage$/)
     public async GivenVisitHomepage(): Promise<void> {
-        return browser.get('http://www.angularjs.org');
+        await browser.get('http://www.angularjs.org');
     }
 
     @given(/^I submit the name "([^"]*)"$/)

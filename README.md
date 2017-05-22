@@ -8,18 +8,30 @@ With this protractor-cucumber-typescript boilerplate you can easily start a test
 * feature and step-file examples about how to use
 * no need to compile TypeScript testfiles before running
 * automatically making screenshots on failed steps (you can adjust the filename to whatever you want, it's just a simple setup)
+* a nice report provided by [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter)
 
 It supports and provides:
 
 * [protractor](https://github.com/angular/protractor) version ^5.1.1
 * [cucumberjs](https://github.com/cucumber/cucumber-js/tree/v1.3.2) version ^1.3.2 (In the future CucumberJS 2 will be supported)
 * [typescript](https://github.com/Microsoft/TypeScript) version ^2.2.2
+* [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter) version ^0.1.0
+
+![Snapshot - Report](./assets/multiple-cucumber-html-reporter.jpg "Snapshot - Report")
 
 And a lot more, see the [`package.json`](package.json)
 
 > This boilerplate is just to give you an initial setup, not how you should code / structure your projects. If you have some tips / beter examples feel free to create a PR
 
 ## How to use
+### To see how this works
+
+- do a `git clone` of this project
+- go to the root of the project and execute `npm install`
+- to get the tests running make sure you have a local `webdriver-manager` running (`directConnect` from protractor has some issues)
+- start the test by running `npm run e2e` from the root of your project
+
+### Implement it in your project
 Just copy this to your project. Copy all the `dev-dependencies` to your projects `package.json` and do a new `npm install` of your project.
 You can use whatever taksrunner you want to run the tests.
 
