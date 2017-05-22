@@ -28,6 +28,7 @@ And a lot more, see the [`package.json`](package.json)
 
 - do a `git clone` of this project
 - go to the root of the project and execute `npm install`
+- to get the tests running make sure you have a local `webdriver-manager` running (`directConnect` from protractor has some issues)
 - start the test by running `npm run e2e` from the root of your project
 
 ### Implement it in your project
