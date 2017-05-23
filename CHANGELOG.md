@@ -27,12 +27,12 @@ Hooks now receive a `scenarioResult` instead of the `scenario`, this means that 
 
 ```javascript
 // 1.3.x
-this.After((scenario: HookScenario): Promise<void> {
+this.After(function (scenario: HookScenario): Promise<void> {
     return Promise.resolve();
 }
 
 // 2.x.x
-this.After((scenarioResult:HookScenarioResult) => {
+this.After(function (scenarioResult:HookScenarioResult): Promise<void>{
     return Promise.resolve();
 });
 ```
@@ -42,13 +42,13 @@ The `isFailed()` method has been removed from the `scenarioResult: HookScenarioR
  
 ```javascript
 // 1.3.x
-this.After((scenario: HookScenario): void {
+this.After(function (scenario: HookScenario): void {
     // logs scenario.isFailed() = true / false
     console.log('scenario.isFailed() = ', scenario.isFailed());
 }
 
 // 2.x.x
-this.After((scenarioResult:HookScenarioResult): void => {
+this.After(function (scenarioResult: HookScenarioResult): void {
     // logs scenario.status = '{string} status'
     console.log('scenarioResult.status = ', scenarioResult.status);
     
@@ -62,12 +62,12 @@ The `attach` function used for adding attachments moved from the API `scenario` 
 
 ```javascript
 // 1.3.0
-this.After(function(scenario, callback) {
+this.After(function (scenario): void {
   scenario.attach(new Buffer([137, 80, 78, 71]), 'image/png')
 });
 
 // 2.0.0
-this.After(function() {
+this.After(function (): void {
   this.attach(new Buffer([137, 80, 78, 71]), 'image/png');
 });
 ```
@@ -96,6 +96,13 @@ interface World {
 ### Remove
 - `ts-flow`
 
+
+
+<a name="1.1.0"></a>
+# 1.1.0
+
+## Features
+- Add reporting
 
 
 <a name="1.0.0"></a>
