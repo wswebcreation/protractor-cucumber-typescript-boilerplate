@@ -4,7 +4,7 @@ A boilerplate for starting a Protractor test setup with CucumberJS and TypeScrip
 ## What it can do
 With this protractor-cucumber-typescript boilerplate you can easily start a testproject. With this boilerplate you get:
 
-* working configuration out of the box for **CucumberJS 2.x** (for CucumberJS 1.x support see [here](https://github.com/wswebcreation/protractor-cucumber-typescript-boilerplate/tree/1.x) and the [CHANGELOG](./CHANGELOG.md#2.0.0) for the migration steps)
+* working configuration out of the box for **CucumberJS 2.x** (for CucumberJS 1.x support see [here](https://github.com/wswebcreation/protractor-cucumber-typescript-boilerplate/tree/1.1.0) and the [CHANGELOG](./CHANGELOG.md#2.0.0) for the migration steps)
 * feature and step-file examples about how to use
 * no need to compile TypeScript testfiles before running
 * automatically making screenshots on failed steps (you can adjust the filename to whatever you want, it's just a simple setup)
@@ -13,7 +13,7 @@ With this protractor-cucumber-typescript boilerplate you can easily start a test
 It supports and provides:
 
 * [protractor](https://github.com/angular/protractor) version 5.1.2
-* [cucumberjs](https://github.com/cucumber/cucumber-js/) **NEW version 2.x.x support!** (for CucumberJS 1.x support see [here](https://github.com/wswebcreation/protractor-cucumber-typescript-boilerplate/tree/1.x))
+* [cucumberjs](https://github.com/cucumber/cucumber-js/) **NEW version 2.x.x support!** (for CucumberJS 1.x support see [here](https://github.com/wswebcreation/protractor-cucumber-typescript-boilerplate/tree/1.1.0))
 * [typescript](https://github.com/Microsoft/TypeScript) version 2.3.2
 * [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter) version ^0.1.0
 
