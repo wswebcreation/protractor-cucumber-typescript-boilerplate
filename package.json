@@ -1,6 +1,6 @@
 {
   "name": "protractor-cucumber-typescript-boilerplate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A boilerplate for starting a Protractor test setup with CucumberJS and TypeScript",
   "main": "index.js",
   "scripts": {
