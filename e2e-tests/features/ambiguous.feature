@@ -5,4 +5,4 @@ Feature: Ambiguous scenario's specified
   Scenario: Ambiguous Johnny wants to see ambiguous scenario's
     Given Ambiguous Johnny visits the Angular homepage
     When he clicks on the second button
-    Then he expects that something happens
+    Then he expects that something really ambiguous happens

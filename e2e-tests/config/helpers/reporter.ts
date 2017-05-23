@@ -1,30 +1,32 @@
 import { Capabilities } from 'selenium-webdriver';
 import { browser } from 'protractor';
-const cucumber = require('cucumber');
-const jsonFormatter = cucumber.Listener.JsonFormatter();
+import { defineSupportCode } from 'cucumber';
+const Cucumber = require('cucumber');
+const jsonFormatter = new Cucumber.JsonFormatter();
 const fs = require('fs-extra');
 const jsonFile = require('jsonfile');
 const path = require('path');
 const projectRoot = process.cwd();
 
-module.exports = async function reportHook() {
-    this.registerListener(jsonFormatter);
-    await _generateAndSaveJSONFile();
+defineSupportCode(({registerListener}) => {
+    registerListener(jsonFormatter);
+
+    return _generateAndSaveJsonFile();
 
     /**
      * Generate and save the report json files
      */
-    async function _generateAndSaveJSONFile(): Promise<void> {
+    async function _generateAndSaveJsonFile(): Promise<void> {
         jsonFormatter.log = async function (report: string) {
             const capabilities = await browser.getCapabilities();
-            await _adjustAndSaveJSONFile(capabilities, report);
+            await _adjustAndSaveJsonFile(capabilities, report);
         };
     }
 
     /**
      * Adjust and save the json files
      */
-    function _adjustAndSaveJSONFile(capabilities: Capabilities, report: string) {
+    function _adjustAndSaveJsonFile(capabilities: Capabilities, report: string) {
         const browserName = capabilities.get('browserName');
         const jsonReport = JSON.parse(report);
         const featureName = jsonReport[0].name.replace(/\s+/g, '_').replace(/\W/g, '').toLowerCase() || 'noName';
@@ -47,4 +49,4 @@ module.exports = async function reportHook() {
 
         jsonFile.writeFileSync(filePath, jsonReport, {spaces: 2});
     }
-};
+});

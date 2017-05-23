@@ -1,20 +1,18 @@
-import { binding, given, when, then } from 'cucumber-tsflow';
+import { defineSupportCode } from 'cucumber';
 
-@binding()
-export default class PendingSteps {
-    @given(/^Johnny visits the Angular homepage$/)
-    public givenVisitsAngularHomepage (): Promise<string> {
+defineSupportCode(({Given, When, Then}) => {
+    Given(/^Johnny visits the Angular homepage$/, givenVisitsAngularHomepage);
+    function givenVisitsAngularHomepage (): Promise<string> {
         return Promise.resolve('pending');
     }
 
-    @when(/^he clicks on the first link$/)
-    public whenClicksOnFirstLink (): Promise<string> {
+    When(/^he clicks on the first link$/,whenClicksOnFirstLink );
+    function whenClicksOnFirstLink (): Promise<string> {
         return Promise.resolve('pending');
     }
 
-    @then(/^he expects that something happens$/)
-    public async thenExpectSomething (): Promise<string> {
+    Then(/^he expects that something happens$/, thenExpectSomething);
+    async function thenExpectSomething (): Promise<string> {
         return Promise.resolve('pending');
     }
-
-}
+});
