@@ -4,7 +4,7 @@ A boilerplate for starting a Protractor test setup with CucumberJS and TypeScrip
 ## What it can do
 With this protractor-cucumber-typescript boilerplate you can easily start a testproject. With this boilerplate you get:
 
-* working configuration out of the box
+* working configuration out of the box for **CucumberJS 2.x** (for CucumberJS 1.x support see [here](https://github.com/wswebcreation/protractor-cucumber-typescript-boilerplate/tree/1.x) and the [CHANGELOG](./CHANGELOG.md#2.0.0) for the migration steps)
 * feature and step-file examples about how to use
 * no need to compile TypeScript testfiles before running
 * automatically making screenshots on failed steps (you can adjust the filename to whatever you want, it's just a simple setup)
@@ -12,9 +12,9 @@ With this protractor-cucumber-typescript boilerplate you can easily start a test
 
 It supports and provides:
 
-* [protractor](https://github.com/angular/protractor) version ^5.1.1
-* [cucumberjs](https://github.com/cucumber/cucumber-js/tree/v1.3.2) version ^1.3.2 (In the future CucumberJS 2 will be supported)
-* [typescript](https://github.com/Microsoft/TypeScript) version ^2.2.2
+* [protractor](https://github.com/angular/protractor) version 5.1.2
+* [cucumberjs](https://github.com/cucumber/cucumber-js/) **NEW version 2.x.x support!** (for CucumberJS 1.x support see [here](https://github.com/wswebcreation/protractor-cucumber-typescript-boilerplate/tree/1.x))
+* [typescript](https://github.com/Microsoft/TypeScript) version 2.3.2
 * [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter) version ^0.1.0
 
 ![Snapshot - Report](./assets/multiple-cucumber-html-reporter.jpg "Snapshot - Report")
@@ -34,87 +34,6 @@ And a lot more, see the [`package.json`](package.json)
 ### Implement it in your project
 Just copy this to your project. Copy all the `dev-dependencies` to your projects `package.json` and do a new `npm install` of your project.
 You can use whatever taksrunner you want to run the tests.
-
-## When you don't have a `*.steps` file
-When you created a `*.feature`-file you can start running the tests and it will throw an output like below. 
-See the [`example.steps.ts`](/e2e-tests/features/example.steps.ts) for the implementation. 
-
-> Advice is not to use the `callback`'s, just use `promises`.
-    
-    > protractor-cucumber-typescript-boilerplate@0.1.0 e2e.local /Users/wswebcreation/protractor-cucumber-typescript-boilerplate
-    > protractor e2e-tests/config/protractor.e2e.conf.js
-    
-    (node:64547) DeprecationWarning: os.tmpDir() is deprecated. Use os.tmpdir() instead.
-    [21:02:30] I/launcher - Running 1 instances of WebDriver
-    [21:02:30] I/local - Starting selenium standalone server...
-    [21:02:30] I/local - Selenium standalone server started at http://192.168.1.13:62529/wd/hub
-    Feature: Angular homepage
-    
-      Scenario: As a visitor I want to be greeted
-      ? Given I visit the Angular homepage
-      ? Given I submit the name "Julie"
-      ? Then I am greeted as "Hello Julie!"
-    
-      Scenario: Validate todo list
-      ? Given I visit the Angular homepage
-      ? Given I count 2 todo's
-      ? Then the last todo should hold "build an AngularJS app"
-    
-      Scenario: Add a todo
-      ? Given I visit the Angular homepage
-      ? Given I add the todo "write a protractor test"
-      ? Then I should have 3 todo's
-      ? And the last todo should hold "write a protractor test"
-    
-    Warnings:
-    
-    1) Scenario: As a visitor I want to be greeted - e2e-tests/features/example.feature:6
-       Step: Given I visit the Angular homepage - e2e-tests/features/example.feature:4
-       Message:
-         Undefined. Implement with the following snippet:
-    
-           @given(/^I visit the Angular homepage$/)
-           public GivenXXX (callback): void {
-             // Write code here that turns the phrase above into concrete actions
-             callback.pending();
-           }
-         
-    
-    2) Scenario: As a visitor I want to be greeted - e2e-tests/features/example.feature:6
-       Step: Given I submit the name "Julie" - e2e-tests/features/example.feature:7
-       Message:
-         Undefined. Implement with the following snippet:
-    
-           @given(/^I submit the name "([^"]*)"$/)
-           public GivenXXX (arg1, callback): void {
-             // Write code here that turns the phrase above into concrete actions
-             callback.pending();
-           }
-         
-    
-    ........................................................................................
-         
-    
-    10) Scenario: Add a todo - e2e-tests/features/example.feature:14
-        Step: And the last todo should hold "write a protractor test" - e2e-tests/features/example.feature:17
-        Message:
-          Undefined. Implement with the following snippet:
-    
-            @then(/^the last todo should hold "([^"]*)"$/)
-            public ThenXXX (arg1, callback): void {
-              // Write code here that turns the phrase above into concrete actions
-              callback.pending();
-            }
-          
-    
-    3 scenarios (3 undefined)
-    10 steps (10 undefined)
-    0m00.002s
-    [21:02:33] I/local - Shutting down selenium standalone server.
-    [21:02:33] I/launcher - 0 instance(s) of WebDriver still running
-    [21:02:33] I/launcher - chrome #01 passed
-
-
 
 ## CucumberJS compiles on-the-fly
 With the provided setup in the [`protractor.shared.conf.js`](/e2e-tests/config/protractor.shared.conf.js) you don't need to compile the TypeScript files before you run them. It will be done automatically for you with the `compiler` in the `cucumberOpts`.
@@ -175,40 +94,195 @@ When there is a compile error it is thrown like below.
 	npm ERR! Please include the following file with any support request:
 	npm ERR!     /Users/wswebcreation/protractor-cucumber-typescript-boilerplate/npm-debug.log
 
+## When you don't have a `*.steps` file
+When you created a `*.feature`-file you can start running the tests and it will throw an output like below. 
+See the [`example.steps.ts`](/e2e-tests/features/example.steps.ts) for the implementation. 
+
+> Advice is not to use the `callback`'s, just use `promises`.
+    
+    @example @happy-flow @angular
+	Feature: Angular homepage
+	
+	  @example @happy-flow @angular @visitor @julie
+	  Scenario: As a visitor I want to be greeted
+	  ? Given I visit the Angular homepage
+	  ? Given I submit the name "Julie"
+	  ? Then I am greeted as "Hello Julie!"
+	
+	  @example @happy-flow @angular @todo @count @validate
+	  Scenario: Validate todo list
+	  ? Given I visit the Angular homepage
+	  ? Given I count 2 todo's
+	  ? Then the last todo should hold "build an AngularJS app"
+	
+	  @example @happy-flow @angular @todo @count @add
+	  Scenario: Add a todo
+	  ? Given I visit the Angular homepage
+	  ? Given I add the todo "write a protractor test"
+	  ? Then I should have 3 todo's
+	  ? And the last todo should hold "write a protractor test"
+	
+	Warnings:
+	
+	1) Scenario: As a visitor I want to be greeted - e2e-tests/features/example.feature:8
+	   Step: Given I visit the Angular homepage - e2e-tests/features/example.feature:5
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Given('I visit the Angular homepage', function (callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	2) Scenario: As a visitor I want to be greeted - e2e-tests/features/example.feature:8
+	   Step: Given I submit the name "Julie" - e2e-tests/features/example.feature:9
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Given('I submit the name {stringInDoubleQuotes}', function (stringInDoubleQuotes, callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	3) Scenario: As a visitor I want to be greeted - e2e-tests/features/example.feature:8
+	   Step: Then I am greeted as "Hello Julie!" - e2e-tests/features/example.feature:10
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Then('I am greeted as {stringInDoubleQuotes}', function (stringInDoubleQuotes, callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	4) Scenario: Validate todo list - e2e-tests/features/example.feature:13
+	   Step: Given I visit the Angular homepage - e2e-tests/features/example.feature:5
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Given('I visit the Angular homepage', function (callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	5) Scenario: Validate todo list - e2e-tests/features/example.feature:13
+	   Step: Given I count 2 todo's - e2e-tests/features/example.feature:14
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Given('I count {int} todo\'s', function (int, callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	6) Scenario: Validate todo list - e2e-tests/features/example.feature:13
+	   Step: Then the last todo should hold "build an AngularJS app" - e2e-tests/features/example.feature:15
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Then('the last todo should hold {stringInDoubleQuotes}', function (stringInDoubleQuotes, callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	7) Scenario: Add a todo - e2e-tests/features/example.feature:18
+	   Step: Given I visit the Angular homepage - e2e-tests/features/example.feature:5
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Given('I visit the Angular homepage', function (callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	8) Scenario: Add a todo - e2e-tests/features/example.feature:18
+	   Step: Given I add the todo "write a protractor test" - e2e-tests/features/example.feature:19
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Given('I add the todo {stringInDoubleQuotes}', function (stringInDoubleQuotes, callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	9) Scenario: Add a todo - e2e-tests/features/example.feature:18
+	   Step: Then I should have 3 todo's - e2e-tests/features/example.feature:20
+	   Message:
+	     Undefined. Implement with the following snippet:
+	
+	       Then('I should have {int} todo\'s', function (int, callback) {
+	         // Write code here that turns the phrase above into concrete actions
+	         callback(null, 'pending');
+	       });
+	
+	10) Scenario: Add a todo - e2e-tests/features/example.feature:18
+	    Step: And the last todo should hold "write a protractor test" - e2e-tests/features/example.feature:21
+	    Message:
+	      Undefined. Implement with the following snippet:
+	
+	        Then('the last todo should hold {stringInDoubleQuotes}', function (stringInDoubleQuotes, callback) {
+	          // Write code here that turns the phrase above into concrete actions
+	          callback(null, 'pending');
+	        });
+	
+	3 scenarios (3 undefined)
+	10 steps (10 undefined)
+	0m00.002s
+	[08:18:54] I/launcher - 0 instance(s) of WebDriver still running
+	[08:18:54] I/launcher - chrome #01 passed
+	
+	
+	==============================================================================================
+	    Multiple Cucumber HTML report generated in:
+	
+	    /Users/wswebcreation/protractor-cucumber-typescript-boilerplate/.tmp/report/index.html
+	
+	    Tnx for using Multiple Cucumber HTML report
+	
+	    Grtz wswebcreation
+	==============================================================================================
+
 ## When tests succeed
 When tests succeed you will see the following
 
-    > protractor-cucumber-typescript-boilerplate@0.1.0 e2e.local /Users/wswebcreation/protractor-cucumber-typescript-boilerplate
-    > protractor e2e-tests/config/protractor.e2e.conf.js
-    
-    (node:64483) DeprecationWarning: os.tmpDir() is deprecated. Use os.tmpdir() instead.
-    [21:01:33] I/launcher - Running 1 instances of WebDriver
-    [21:01:33] I/local - Starting selenium standalone server...
-    [21:01:34] I/local - Selenium standalone server started at http://192.168.1.13:62180/wd/hub
-    Feature: Angular homepage
-    
-      Scenario: As a visitor I want to be greeted
-      ✔ Given I visit the Angular homepage
-      ✔ Given I submit the name "Julie"
-      ✔ Then I am greeted as "Hello Julie!"
-    
-      Scenario: Validate todo list
-      ✔ Given I visit the Angular homepage
-      ✔ Given I count 2 todo's
-      ✔ Then the last todo should hold "build an AngularJS app"
-    
-      Scenario: Add a todo
-      ✔ Given I visit the Angular homepage
-      ✔ Given I add the todo "write a protractor test"
-      ✔ Then I should have 3 todo's
-      ✔ And the last todo should hold "write a protractor test"
-    
-    3 scenarios (3 passed)
-    10 steps (10 passed)
-    0m06.873s
-    [21:01:43] I/local - Shutting down selenium standalone server.
-    [21:01:43] I/launcher - 0 instance(s) of WebDriver still running
-    [21:01:43] I/launcher - chrome #01 passed
+	@example @happy-flow @angular
+	Feature: Angular homepage
+	
+	  @example @happy-flow @angular @visitor @julie
+	  Scenario: As a visitor I want to be greeted
+	  ✔ Given I visit the Angular homepage
+	  ✔ Given I submit the name "Julie"
+	  ✔ Then I am greeted as "Hello Julie!"
+	
+	  @example @happy-flow @angular @todo @count @validate
+	  Scenario: Validate todo list
+	  ✔ Given I visit the Angular homepage
+	  ✔ Given I count 2 todo's
+	  ✔ Then the last todo should hold "build an AngularJS app"
+	
+	  @example @happy-flow @angular @todo @count @add
+	  Scenario: Add a todo
+	  ✔ Given I visit the Angular homepage
+	  ✔ Given I add the todo "write a protractor test"
+	  ✔ Then I should have 3 todo's
+	  ✔ And the last todo should hold "write a protractor test"
+	
+	3 scenarios (3 passed)
+	10 steps (10 passed)
+	0m09.857s
+	[08:16:28] I/launcher - 0 instance(s) of WebDriver still running
+	[08:16:28] I/launcher - chrome #01 passed
+	
+	
+	==============================================================================================
+	    Multiple Cucumber HTML report generated in:
+	
+	    /Users/wswebcreation/protractor-cucumber-typescript-boilerplate/.tmp/report/index.html
+	
+	    Tnx for using Multiple Cucumber HTML report
+	
+	    Grtz wswebcreation
+	==============================================================================================
+
 
 # Contribution
 If you like to add some extra info, nice packages or have some improvements, feel free to add a PR.

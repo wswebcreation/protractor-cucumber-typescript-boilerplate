@@ -1,15 +1,17 @@
 import { Capabilities } from 'selenium-webdriver';
 import { browser } from 'protractor';
-const cucumber = require('cucumber');
-const jsonFormatter = cucumber.Listener.JsonFormatter();
+import { defineSupportCode } from "cucumber";
+const Cucumber = require('cucumber');
+const jsonFormatter = new Cucumber.JsonFormatter();
 const fs = require('fs-extra');
 const jsonFile = require('jsonfile');
 const path = require('path');
 const projectRoot = process.cwd();
 
-module.exports = async function reportHook() {
-    this.registerListener(jsonFormatter);
-    await _generateAndSaveJSONFile();
+defineSupportCode(function ({registerListener}) {
+    registerListener(jsonFormatter);
+
+    return  _generateAndSaveJSONFile();
 
     /**
      * Generate and save the report json files
@@ -47,4 +49,4 @@ module.exports = async function reportHook() {
 
         jsonFile.writeFileSync(filePath, jsonReport, {spaces: 2});
     }
-};
+});

@@ -1,6 +1,5 @@
-export const defaultTimeout: number = 10000;
+import { defineSupportCode } from 'cucumber';
 
-module.exports = function () {
-    // Default timeout for each cucumber step
-    this.setDefaultTimeout(defaultTimeout);
-};
+defineSupportCode(function ({setDefaultTimeout}) {
+    setDefaultTimeout(10000);
+});
