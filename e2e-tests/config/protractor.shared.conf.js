@@ -25,7 +25,7 @@ function sharedConfig() {
         onPrepare: function () {
             // place something here
         },
-        afterLaunch: function(){
+        afterLaunch: function () {
             multiCucumberHTLMReporter.generate({
                 openReportInBrowser: true,
                 jsonDir: '.tmp/json-output',
@@ -34,7 +34,10 @@ function sharedConfig() {
         },
 
         allScriptsTimeout: 11000,
-        disableChecks: true
+        disableChecks: true,
+
+        // From `protractor-cucumber-framework`, allows cucumber to handle the 199 exception and record it appropriately
+        ignoreUncaughtExceptions: true
     };
 
     return config;
@@ -56,8 +59,6 @@ function sharedConfig() {
  *     // Else
  *     npm run e2e
  * </pre>
- *
- * @return {Array<string>}
  */
 function getFeatureFiles() {
     if (argv.feature) {

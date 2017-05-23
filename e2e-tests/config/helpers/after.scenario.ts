@@ -4,10 +4,10 @@ import { browser } from 'protractor';
 import { WriteStream, ensureDirSync, createWriteStream } from 'fs-extra';
 
 interface World {
-    'attach': ((arg1: string | Buffer, arg2: string) => void)
+    'attach': ((arg1: string | Buffer, arg2: string) => void);
 }
 
-defineSupportCode(function ({After}) {
+defineSupportCode(({After}) => {
     After(function (scenarioResult: HookScenarioResult): Promise<void> {
         const world = this;
         return (scenarioResult.status === 'failed') ? saveFailedScenarioScreenshot(world, scenarioResult) : Promise.resolve();

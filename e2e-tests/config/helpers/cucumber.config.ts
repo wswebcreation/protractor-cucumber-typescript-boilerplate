@@ -1,5 +1,5 @@
 import { defineSupportCode } from 'cucumber';
 
-defineSupportCode(function ({setDefaultTimeout}) {
+defineSupportCode(({setDefaultTimeout}) => {
     setDefaultTimeout(10000);
 });
