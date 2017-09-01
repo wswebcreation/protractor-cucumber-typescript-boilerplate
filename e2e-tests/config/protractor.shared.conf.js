@@ -17,21 +17,24 @@ function sharedConfig() {
                 path.resolve(process.cwd(), './e2e-tests/**/reporter.ts'),
                 path.resolve(process.cwd(), './e2e-tests/**/*.steps.ts')
             ],
-            format: 'pretty',
             tags: ''
         },
         specs: getFeatureFiles(),
 
         onPrepare: function () {
             // place something here
+            return browser.getCapabilities()
+                .then((capabilities) => {
+                    browser.browserName = capabilities.get('browserName').toLowerCase();
+                })
         },
-        afterLaunch: function () {
-            multiCucumberHTLMReporter.generate({
-                openReportInBrowser: true,
-                jsonDir: '.tmp/json-output',
-                reportPath: './.tmp/report/'
-            });
-        },
+        // afterLaunch: function () {
+        //     multiCucumberHTLMReporter.generate({
+        //         openReportInBrowser: true,
+        //         jsonDir: '.tmp/json-output',
+        //         reportPath: './.tmp/report/'
+        //     });
+        // },
 
         allScriptsTimeout: 11000,
         disableChecks: true,
