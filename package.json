@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "e2e": "protractor e2e-tests/config/protractor.e2e.conf.js",
+    "flake": "node e2e-tests/config/protractor.flake.js",
     "postinstall": "webdriver-manager update"
   },
   "repository": {
