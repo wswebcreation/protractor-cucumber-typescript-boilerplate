@@ -1,7 +1,13 @@
 'use strict';
 const argv = require('yargs').argv;
+const fs = require('fs-extra');
 const path = require('path');
 const multiCucumberHTLMReporter = require('multiple-cucumber-html-reporter');
+let instanceData;
+const resultsFolder = '.tmp/results';
+const jsonOutputFolder = './.tmp/json-output-folder';
+const cucumberReportName = `results`;
+
 
 exports.config = sharedConfig();
 
@@ -17,18 +23,67 @@ function sharedConfig() {
                 path.resolve(process.cwd(), './e2e-tests/**/reporter.ts'),
                 path.resolve(process.cwd(), './e2e-tests/**/*.steps.ts')
             ],
-            format: 'pretty',
+            format: [`json:${resultsFolder}/${cucumberReportName}.json`, 'pretty'],
             tags: ''
         },
         specs: getFeatureFiles(),
 
+        beforeLaunch: () =>{
+            fs.ensureDirSync(resultsFolder);
+            fs.ensureDirSync(jsonOutputFolder);
+        },
+
         onPrepare: function () {
             // place something here
+            return browser.getCapabilities()
+                .then((capabilities) => {
+                    browser.browserName = capabilities.get('browserName').toLowerCase();
+
+                    instanceData = {
+                        pid: process.pid,
+                        metadata: {
+                            browser: {
+                                name: browser.browserName,
+                                version: 'latest'
+                            },
+                            device: 'MacBook Pro 15',
+                            deviceType: 'laptop',
+                            environment: 'local',
+                            platform: {
+                                name: 'OSX',
+                                version: '10.12.6'
+                            }
+                        }
+                    };
+                });
         },
-        afterLaunch: function () {
+        onCleanUp: function () {
+            if (fs.existsSync(`./${resultsFolder}/results.${instanceData.pid}.json`)) {
+                const jsonReport = fs.readJsonSync(`./${resultsFolder}/${cucumberReportName}.${instanceData.pid}.json`);
+
+                jsonReport.map((singleReport) => {
+                    const featureName = singleReport.name.replace(/\s+/g, '_').replace(/\W/g, '').toLowerCase() || 'noName';
+                    const filePath = path.join(jsonOutputFolder, `${featureName}.${browser.browserName}_${Date.now()}.json`);
+
+                    // Remove a previous file if it exists to prevent double reports of 1 feature + browser execution
+                    fs.readdirSync(jsonOutputFolder)
+                        .filter((file) => file.match(new RegExp(`${featureName}.${browser.browserName}`, 'ig')))
+                        .forEach((file) => fs.removeSync(`${jsonOutputFolder}/${file}`));
+
+                    singleReport.metadata = instanceData.metadata;
+                    fs.writeJsonSync(filePath, JSON.parse(`[${JSON.stringify(singleReport)}]`), { spaces: 2 });
+                });
+            } else {
+                console.warn(`File: './${resultsFolder}/${cucumberReportName}.${instanceData.pid}.json' is not present.`);
+            }
+        },
+
+        afterLaunch: function(){
+            fs.removeSync(resultsFolder);
+
             multiCucumberHTLMReporter.generate({
                 openReportInBrowser: true,
-                jsonDir: '.tmp/json-output',
+                jsonDir: '.tmp/json-output-folder',
                 reportPath: './.tmp/report/'
             });
         },
