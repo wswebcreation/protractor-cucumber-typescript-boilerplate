@@ -1,5 +1,5 @@
 @example @happy-flow @angular
-Feature: Angular homepage
+Feature: Happy flow V3
 
   Background: Open Angular homepage
     Given I visit the Angular homepage

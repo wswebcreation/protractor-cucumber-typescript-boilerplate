@@ -1,4 +1,4 @@
-Feature: Ambiguous scenario's specified
+Feature: Ambiguous scenario's specified V3
   The scenario's have been scripted twice
   So the report should hold ambiguous steps
 
