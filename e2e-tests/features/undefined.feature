@@ -1,5 +1,5 @@
 @undefined
-Feature: Undefined scenario's specified
+Feature: Undefined scenario's specified V2
   No scenario's have scripted steps
   So the report should hold undefined steps
 

@@ -1,5 +1,5 @@
 @skip
-Feature: Failure report
+Feature: Failure report V2
     Failed scenario's should have attached screenshots and stacktrace
     So a reviewer can judge what went wrong
 

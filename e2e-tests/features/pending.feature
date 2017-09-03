@@ -1,4 +1,4 @@
-Feature: Pending scenario's specified
+Feature: Pending scenario's specified V2
   The scenario's have scripted pending steps
   So the report should hold pending steps
 
