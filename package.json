@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "e2e": "protractor e2e-tests/config/protractor.e2e.conf.js",
+    "flake": "node e2e-tests/config/protractor.flake.js",
     "postinstall": "webdriver-manager update"
   },
   "repository": {
@@ -37,6 +38,7 @@
     "multiple-cucumber-html-reporter": "0.1.0",
     "protractor": "5.1.2",
     "protractor-cucumber-framework": "4.0.3",
+    "protractor-flake": "^2.7.0",
     "ts-node": "3.0.4",
     "tslint": "5.2.0",
     "typescript": "2.3.2",
