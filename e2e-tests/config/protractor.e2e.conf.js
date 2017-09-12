@@ -1,7 +1,6 @@
 'use strict';
 const config = require('./protractor.shared.conf').config;
 
-config.baseUrl = 'http://localhost:5555';
 config.seleniumAddress = 'http://localhost:4444/wd/hub/';
 
 config.multiCapabilities = [
@@ -11,12 +10,34 @@ config.multiCapabilities = [
             args: ['disable-infobars']
         },
         shardTestFiles: true,
-        maxInstances: 5
+        maxInstances: 5,
+        deviceProperties:{
+            browser: {
+                name: 'chrome',
+                version: 'latest'
+            },
+            device: 'local development machine',
+            platform: {
+                name: 'osx',
+                version: '10.12.6'
+            }
+        }
     },
     {
         browserName: 'firefox',
         shardTestFiles: true,
-        maxInstances: 5
+        maxInstances: 5,
+        deviceProperties:{
+            browser: {
+                name: 'firefox',
+                version: 'latest'
+            },
+            device: 'local development machine',
+            platform: {
+                name: 'osx',
+                version: '10.12.6'
+            }
+        }
     }
 ];
 
