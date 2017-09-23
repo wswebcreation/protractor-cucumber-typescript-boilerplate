@@ -1,0 +1,16 @@
+sudo: required
+dist: trusty
+
+language: node_js
+node_js:
+  - "6"
+
+addons:
+  firefox: latest
+  chrome: stable
+
+install:
+  - npm install
+
+script:
+  - npm run e2e

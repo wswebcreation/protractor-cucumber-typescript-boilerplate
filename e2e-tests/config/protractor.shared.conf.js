@@ -1,7 +1,7 @@
 'use strict';
 const argv = require('yargs').argv;
+const fs = require('fs-extra');
 const path = require('path');
-
 
 exports.config = {
     /**
@@ -9,6 +9,13 @@ exports.config = {
      */
     allScriptsTimeout: 11000,
     disableChecks: true,
+
+    beforeLaunch: () =>{
+        console.log(`\n==========================================================================`);
+        console.log(`\nThe directory './tmp', which holds reports / screenshots is being removed.\n`);
+        console.log(`==========================================================================\n`);
+        fs.removeSync('./.tmp');
+    },
 
     /**
      * CucumberJS specific
@@ -23,7 +30,7 @@ exports.config = {
             path.resolve(process.cwd(), './e2e-tests/**/*.steps.ts')
         ],
         format: 'json:.tmp/results.json',
-        tags: ''
+        tags: argv.tags || ''
     },
     specs: getFeatureFiles(),
 
@@ -42,8 +49,7 @@ exports.config = {
             automaticallyGenerateReport: true,
             metadataKey: 'deviceProperties',
             removeExistingJsonReportFile: true,
-            removeOriginalJsonReportFile: true,
-            saveCollectedJSON: true
+            removeOriginalJsonReportFile: true
         }
     }]
 };

@@ -4,8 +4,19 @@
 ## Changes to the boilerplate
 
 - Cleaned up the `protractor.shared.conf.js`:
-    - remove the `cucumberOpts.format: 'pretty'`, because it was removed by CucumberJS and added to `cucumberOpts.format: 'json:.tmp/results.json'` to nicely integrate with the new report plugin
+    - remove the `cucumberOpts.format: 'pretty'`, because it was removed by CucumberJS
+    - added `cucumberOpts.format: 'json:.tmp/results.json'` to nicely integrate with the new report plugin
     - added `protractor-multiple-cucumber-html-reporter-plugin` to simplify generating and using CucumberJS reports
+    - added use of tags from the command line
+    - added removing of the `.tmp/`-folder when starting so no double reports are madew
+- fix issue with using this boilerplate with Angular-Cli. It threw the below error.
+
+```shell
+Unhandled rejection TSError: X Unable to compile TypeScript
+\chai-imports.ts (3:5) : Cannot redeclare block-scoped variable 'chai'
+```
+
+
 - Remove the `reporter.ts`-hook because CucumberJS 3 removed the `registerListener` which was used to manipulate and save the JSON-report file
 - In CucumberJS version 3 the `HookScenarioResult` has been brought down from an object with all the feature / scenario / step data in it to a bare minimum. Because `@types/cucumber` is not compatible with CucumberJS 3 I've extended the `HookScenarioResult` in the `after.scenario.ts` with the new interface
 
@@ -21,6 +32,9 @@ interface TestCase extends HookScenarioResult {
     });
 }
 ```
+
+- added the script `npm run flake`. This will run protractor through `protractor-flake` so if a test(s) is flaky, the failed featurefiles will be rerun for a second time.
+- added Travis CI
 
 ## Dependencies:
 
