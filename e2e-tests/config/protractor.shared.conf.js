@@ -1,47 +1,58 @@
 'use strict';
 const argv = require('yargs').argv;
+const fs = require('fs-extra');
 const path = require('path');
-const multiCucumberHTLMReporter = require('multiple-cucumber-html-reporter');
 
-exports.config = sharedConfig();
+exports.config = {
+    /**
+     * Protractor specific
+     */
+    allScriptsTimeout: 11000,
+    disableChecks: true,
 
-function sharedConfig() {
-    const config = {
-        framework: 'custom',
-        frameworkPath: require.resolve('protractor-cucumber-framework'),
-        cucumberOpts: {
-            compiler: "ts:ts-node/register",
-            require: [
-                path.resolve(process.cwd(), './e2e-tests/**/after.scenario.ts'),
-                path.resolve(process.cwd(), './e2e-tests/**/cucumber.config.ts'),
-                path.resolve(process.cwd(), './e2e-tests/**/reporter.ts'),
-                path.resolve(process.cwd(), './e2e-tests/**/*.steps.ts')
-            ],
-            format: 'pretty',
-            tags: ''
-        },
-        specs: getFeatureFiles(),
+    beforeLaunch: () =>{
+        console.log(`\n==========================================================================`);
+        console.log(`\nThe directory './tmp', which holds reports / screenshots is being removed.\n`);
+        console.log(`==========================================================================\n`);
+        fs.removeSync('./.tmp');
+    },
 
-        onPrepare: function () {
-            // place something here
-        },
-        afterLaunch: function () {
-            multiCucumberHTLMReporter.generate({
-                openReportInBrowser: true,
-                jsonDir: '.tmp/json-output',
-                reportPath: './.tmp/report/'
-            });
-        },
+    /**
+     * CucumberJS specific
+     */
+    framework: 'custom',
+    frameworkPath: require.resolve('protractor-cucumber-framework'),
+    cucumberOpts: {
+        compiler: "ts:ts-node/register",
+        require: [
+            path.resolve(process.cwd(), './e2e-tests/**/after.scenario.ts'),
+            path.resolve(process.cwd(), './e2e-tests/**/cucumber.config.ts'),
+            path.resolve(process.cwd(), './e2e-tests/**/*.steps.ts')
+        ],
+        format: 'json:.tmp/results.json',
+        tags: argv.tags || ''
+    },
+    specs: getFeatureFiles(),
 
-        allScriptsTimeout: 11000,
-        disableChecks: true,
+    /**
+     * From `protractor-cucumber-framework`, allows cucumber to handle the 199
+     * exception and record it appropriately
+     */
+    ignoreUncaughtExceptions: true,
 
-        // From `protractor-cucumber-framework`, allows cucumber to handle the 199 exception and record it appropriately
-        ignoreUncaughtExceptions: true
-    };
-
-    return config;
-}
+    /**
+     * The new reporting plugin
+     */
+    plugins: [{
+        package: 'protractor-multiple-cucumber-html-reporter-plugin',
+        options: {
+            automaticallyGenerateReport: true,
+            metadataKey: 'deviceProperties',
+            removeExistingJsonReportFile: true,
+            removeOriginalJsonReportFile: true
+        }
+    }]
+};
 
 /**
  * Get the featurefiles that need to be run based on an command line flag that is passed, if nothing is passed all the

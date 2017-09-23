@@ -1,10 +1,12 @@
 {
   "name": "protractor-cucumber-typescript-boilerplate",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A boilerplate for starting a Protractor test setup with CucumberJS and TypeScript",
   "main": "index.js",
   "scripts": {
     "e2e": "protractor e2e-tests/config/protractor.e2e.conf.js",
+    "flake": "node e2e-tests/config/protractor.flake.js",
+    "travis": "protractor e2e-tests/config/protractor.travis.conf.js",
     "postinstall": "webdriver-manager update"
   },
   "repository": {
@@ -25,21 +27,21 @@
   },
   "homepage": "https://github.com/wswebcreation/protractor-cucumber-typescript-boilerplate#readme",
   "devDependencies": {
-    "@types/chai": "3.5.2",
-    "@types/chai-as-promised": "0.0.30",
-    "@types/cucumber": "2.0.1",
-    "@types/fs-extra": "3.0.2",
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "cucumber": "2.2.0",
-    "fs-extra": "3.0.1",
-    "jsonfile": "3.0.0",
-    "multiple-cucumber-html-reporter": "0.1.0",
+    "@types/chai": "^4.0.4",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/cucumber": "^2.0.3",
+    "@types/fs-extra": "^4.0.2",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "cucumber": "~3.0.1",
+    "fs-extra": "^4.0.1",
     "protractor": "5.1.2",
-    "protractor-cucumber-framework": "3.1.0",
-    "ts-node": "3.0.4",
-    "tslint": "5.2.0",
-    "typescript": "2.3.2",
-    "yargs": "8.0.1"
+    "protractor-cucumber-framework": "~4.0.7",
+    "protractor-flake": "^3.0.0",
+    "protractor-multiple-cucumber-html-reporter-plugin": "^1.1.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
+    "yargs": "^8.0.2"
   }
 }
