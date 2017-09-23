@@ -1,4 +1,6 @@
 # protractor-cucumber-typescript-boilerplate
+[![Build Status](https://travis-ci.org/wswebcreation/protractor-cucumber-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/wswebcreation/protractor-cucumber-typescript-boilerplate)
+
 A boilerplate for starting a Protractor test setup with CucumberJS and TypeScript
 
 ## What it can do
