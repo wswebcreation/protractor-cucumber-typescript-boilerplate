@@ -1,6 +1,6 @@
 {
   "name": "protractor-cucumber-typescript-boilerplate",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A boilerplate for starting a Protractor test setup with CucumberJS and TypeScript",
   "main": "index.js",
   "scripts": {
@@ -36,7 +36,7 @@
     "cucumber": "~3.0.1",
     "fs-extra": "^4.0.1",
     "protractor": "5.1.2",
-    "protractor-cucumber-framework": "~4.0.7",
+    "protractor-cucumber-framework": "~4.1.1",
     "protractor-flake": "^3.0.0",
     "protractor-multiple-cucumber-html-reporter-plugin": "^1.1.0",
     "ts-node": "^3.3.0",

@@ -1,6 +1,7 @@
 'use strict';
 
 const protractorFlake = require('protractor-flake');
+const argv = require('yargs').argv;
 
 protractorFlake({
     maxAttempts: 2,

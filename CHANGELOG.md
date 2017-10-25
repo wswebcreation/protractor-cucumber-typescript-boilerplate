@@ -1,3 +1,16 @@
+<a name="3.0.1"></a>
+# 3.0.1
+
+## Fixes
+- Update the dependencies. The update fixes and issue that the empty tags causing an `Error: empty stack` error due. The cause lies in an update in CucumberJS version [3.0.4](https://github.com/cucumber/cucumber-js/blob/master/CHANGELOG.md#304-2017-10-04). 
+The issue has been fixed with [this PR](https://github.com/protractor-cucumber-framework/protractor-cucumber-framework/pull/114) on protractor-cucumber-framework
+- `npm run flake` didn't work due to a missing dependency. This has been fixed.
+
+## Dependencies:
+
+### Update
+- `protractor-cucumber-framework` to 4.1.1
+
 <a name="3.0.0"></a>
 # 3.0.0
 

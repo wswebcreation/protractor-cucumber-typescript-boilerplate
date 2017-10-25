@@ -10,7 +10,7 @@ exports.config = {
     allScriptsTimeout: 11000,
     disableChecks: true,
 
-    beforeLaunch: () =>{
+    beforeLaunch: () => {
         console.log(`\n==========================================================================`);
         console.log(`\nThe directory './tmp', which holds reports / screenshots is being removed.\n`);
         console.log(`==========================================================================\n`);
