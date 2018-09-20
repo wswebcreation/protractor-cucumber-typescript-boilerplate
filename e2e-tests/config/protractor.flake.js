@@ -2,12 +2,18 @@
 
 const protractorFlake = require('protractor-flake');
 const argv = require('yargs').argv;
+let configFile = './e2e-tests/config/protractor.travis.conf.js';
+
+if(argv.multiCap){
+    configFile = './e2e-tests/config/protractor.e2e.conf.js';
+    console.log('***************Executing Config*************',configFile);
+}
 
 protractorFlake({
-    maxAttempts: 2,
+    maxAttempts: 1,
     parser: 'cucumber',
     protractorArgs: [
-        './e2e-tests/config/protractor.e2e.conf.js',
+        configFile,
         `--feature=${argv.feature || '*'}`,
         `--tags=${argv.tags || ''}`
     ]
