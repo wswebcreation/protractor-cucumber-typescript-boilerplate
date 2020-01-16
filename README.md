@@ -1,3 +1,6 @@
+# IMPORTANT
+**This project is not maintained anymore**
+
 # protractor-cucumber-typescript-boilerplate
 
 > **NOTE:**<br>
